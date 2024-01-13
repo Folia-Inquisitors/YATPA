@@ -1,17 +1,7 @@
 package me.hsgamer.yatpa;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import me.hsgamer.hscore.bukkit.baseplugin.BasePlugin;
 
-public final class YATPA extends JavaPlugin {
+public final class YATPA extends BasePlugin {
 
-    @Override
-    public void onEnable() {
-        // Plugin startup logic
-
-    }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
 }
