@@ -1,0 +1,5 @@
+name: YATPA
+version: '${project.version}'
+main: me.hsgamer.yatpa.YATPA
+authors: [HSGamer]
+description: Yet Another TPA plugin
