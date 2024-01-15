@@ -43,6 +43,13 @@ public abstract class TeleportRequestCommand extends Command {
         }
 
         Player senderPlayer = (Player) sender;
+
+        long cooldownLeft = plugin.getCooldownManager().getCooldownLeft(senderPlayer.getUniqueId());
+        if (cooldownLeft > 0) {
+            MessageUtils.sendMessage(sender, plugin.getMessageConfig().getCooldownLeft(cooldownLeft));
+            return false;
+        }
+
         Player targetPlayer = sender.getServer().getPlayer(args[0]);
 
         if (targetPlayer == null) {
@@ -67,6 +74,7 @@ public abstract class TeleportRequestCommand extends Command {
             case SUCCESS:
                 MessageUtils.sendMessage(sender, plugin.getMessageConfig().getRequestSent(targetPlayer));
                 sendTargetRequest(senderPlayer, targetPlayer);
+                plugin.getCooldownManager().addCooldown(senderPlayer.getUniqueId());
                 return true;
             default:
                 break;

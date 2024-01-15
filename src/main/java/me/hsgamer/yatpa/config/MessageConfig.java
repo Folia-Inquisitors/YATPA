@@ -80,6 +80,15 @@ public interface MessageConfig {
         return "&cThe player is in teleport";
     }
 
+    @ConfigPath({"error", "cooldown"})
+    default String getCooldownLeft() {
+        return "&cYou need to wait &f{cooldown} &cmore seconds to send a request";
+    }
+
+    default String getCooldownLeft(long cooldown) {
+        return getCooldownLeft().replace("{cooldown}", String.valueOf(cooldown / 1000));
+    }
+
     @ConfigPath({"request", "sent"})
     default String getRequestSent() {
         return "&aYou have sent a request to &f{player}";

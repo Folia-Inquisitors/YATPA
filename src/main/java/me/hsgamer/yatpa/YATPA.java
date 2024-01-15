@@ -10,6 +10,7 @@ import me.hsgamer.yatpa.command.TeleportHereCommand;
 import me.hsgamer.yatpa.command.TeleportNormalCommand;
 import me.hsgamer.yatpa.config.MainConfig;
 import me.hsgamer.yatpa.config.MessageConfig;
+import me.hsgamer.yatpa.cooldown.CooldownManager;
 import me.hsgamer.yatpa.listener.PlayerListener;
 import me.hsgamer.yatpa.request.RequestManager;
 import me.hsgamer.yatpa.teleport.TeleportManager;
@@ -22,6 +23,7 @@ public final class YATPA extends BasePlugin {
     private final MessageConfig messageConfig = ConfigGenerator.newInstance(MessageConfig.class, new BukkitConfig(this, "messages.yml"));
     private final RequestManager requestManager = new RequestManager();
     private final TeleportManager teleportManager = new TeleportManager(this);
+    private final CooldownManager cooldownManager = new CooldownManager(this);
 
     @Override
     public void load() {
@@ -64,5 +66,9 @@ public final class YATPA extends BasePlugin {
 
     public TeleportManager getTeleportManager() {
         return teleportManager;
+    }
+
+    public CooldownManager getCooldownManager() {
+        return cooldownManager;
     }
 }
