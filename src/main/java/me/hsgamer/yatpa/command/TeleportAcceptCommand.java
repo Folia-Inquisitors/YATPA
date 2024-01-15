@@ -20,12 +20,12 @@ public class TeleportAcceptCommand extends TeleportResponseCommand {
         TeleportResult teleportResult = plugin.getTeleportManager().teleport(requestEntry);
         switch (teleportResult.status) {
             case OFFLINE:
-                MessageUtils.sendMessage(target, plugin.getMessageConfig().getTeleportOffline());
                 MessageUtils.sendMessage(requester, plugin.getMessageConfig().getTeleportOffline());
+                MessageUtils.sendMessage(target, plugin.getMessageConfig().getTeleportOffline());
                 break;
             case IN_TELEPORT:
-                MessageUtils.sendMessage(target, plugin.getMessageConfig().getTeleportInTeleport());
                 MessageUtils.sendMessage(requester, plugin.getMessageConfig().getTeleportInTeleport());
+                MessageUtils.sendMessage(target, plugin.getMessageConfig().getTeleportInTeleport());
                 break;
             case SUCCESS_DELAYED:
                 MessageUtils.sendMessage(teleportResult.player, plugin.getMessageConfig().getTeleportingDelayedFrom(teleportResult.target, plugin.getMainConfig().teleportDelay()));
