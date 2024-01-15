@@ -5,9 +5,9 @@ import me.hsgamer.yatpa.Permissions;
 import me.hsgamer.yatpa.YATPA;
 import me.hsgamer.yatpa.request.RequestEntry;
 import me.hsgamer.yatpa.teleport.TeleportResult;
-import org.bukkit.entity.Player;
 
 import java.util.Collections;
+import java.util.UUID;
 
 public class TeleportAcceptCommand extends TeleportResponseCommand {
     public TeleportAcceptCommand(YATPA plugin) {
@@ -16,7 +16,7 @@ public class TeleportAcceptCommand extends TeleportResponseCommand {
     }
 
     @Override
-    protected void execute(RequestEntry requestEntry, Player requester, Player target) {
+    protected void execute(RequestEntry requestEntry, UUID requester, UUID target) {
         TeleportResult teleportResult = plugin.getTeleportManager().teleport(requestEntry);
         switch (teleportResult.status) {
             case OFFLINE:

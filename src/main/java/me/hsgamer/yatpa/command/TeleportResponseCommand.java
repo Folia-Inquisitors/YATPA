@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public abstract class TeleportResponseCommand extends Command {
     protected final YATPA plugin;
@@ -19,7 +20,7 @@ public abstract class TeleportResponseCommand extends Command {
         this.plugin = plugin;
     }
 
-    protected abstract void execute(RequestEntry requestEntry, Player requester, Player target);
+    protected abstract void execute(RequestEntry requestEntry, UUID requester, UUID target);
 
     @Override
     public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
@@ -55,7 +56,7 @@ public abstract class TeleportResponseCommand extends Command {
         }
 
         RequestEntry requestEntry = optionalRequestEntry.get();
-        execute(requestEntry, requestPlayer, targetPlayer);
+        execute(requestEntry, requestEntry.requester, requestEntry.target);
         return true;
     }
 }
