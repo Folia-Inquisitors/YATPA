@@ -1,6 +1,7 @@
-package me.hsgamer.yatpa.teleport;
+package me.hsgamer.yatpa.teleport.impl;
 
 import me.hsgamer.hscore.bukkit.scheduler.Scheduler;
+import me.hsgamer.yatpa.teleport.Teleport;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 

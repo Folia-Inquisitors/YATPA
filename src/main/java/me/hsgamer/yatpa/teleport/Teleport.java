@@ -1,5 +1,7 @@
 package me.hsgamer.yatpa.teleport;
 
+import me.hsgamer.yatpa.teleport.impl.AsyncTeleport;
+import me.hsgamer.yatpa.teleport.impl.SyncTeleport;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
