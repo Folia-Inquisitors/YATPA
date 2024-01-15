@@ -54,7 +54,7 @@ public class TeleportManager {
         if (plugin.getMainConfig().hasTeleportDelay()) {
             Task task = Scheduler.plugin(plugin).async().runTaskLater(() -> teleport.teleport(player, targetLocation), plugin.getMainConfig().teleportDelayTicks());
             inTeleportMap.put(player.getUniqueId(), task);
-            return new TeleportResult(TeleportStatus.SUCCESS, player, targetPlayer, targetLocation);
+            return new TeleportResult(TeleportStatus.SUCCESS_DELAYED, player, targetPlayer, targetLocation);
         } else {
             Task task = Scheduler.plugin(plugin).async().runTask(() -> teleport.teleport(player, targetLocation));
             inTeleportMap.put(player.getUniqueId(), task);

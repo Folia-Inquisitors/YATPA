@@ -28,6 +28,10 @@ public abstract class TeleportRequestCommand extends Command {
 
     @Override
     public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
+        if (!testPermission(sender)) {
+            return false;
+        }
+
         if (!(sender instanceof Player)) {
             MessageUtils.sendMessage(sender, plugin.getMessageConfig().getPlayerOnly());
             return false;

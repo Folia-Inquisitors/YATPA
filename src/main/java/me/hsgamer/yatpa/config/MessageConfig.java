@@ -5,21 +5,39 @@ import org.bukkit.entity.Player;
 
 public interface MessageConfig {
     @ConfigPath({"teleport", "teleporting", "from-player", "instant"})
-    default String getTeleportingFrom() {
+    default String getTeleportingInstantFrom() {
         return "&aYou are being teleported to &f{player}";
     }
 
-    default String getTeleportingFrom(Player player) {
-        return getTeleportingFrom().replace("{player}", player.getName());
+    default String getTeleportingInstantFrom(Player player) {
+        return getTeleportingInstantFrom().replace("{player}", player.getName());
     }
 
     @ConfigPath({"teleport", "teleporting", "to-player", "instant"})
-    default String getTeleportingTo() {
+    default String getTeleportingInstantTo() {
         return "&a{player} is being teleported to you";
     }
 
-    default String getTeleportingTo(Player player) {
-        return getTeleportingTo().replace("{player}", player.getName());
+    default String getTeleportingInstantTo(Player player) {
+        return getTeleportingInstantTo().replace("{player}", player.getName());
+    }
+
+    @ConfigPath({"teleport", "teleporting", "from-player", "delayed"})
+    default String getTeleportingDelayedFrom() {
+        return "&aYou will be teleported to &f{player} &ain &f{delay} &aseconds";
+    }
+
+    default String getTeleportingDelayedFrom(Player player, int delay) {
+        return getTeleportingDelayedFrom().replace("{player}", player.getName()).replace("{delay}", String.valueOf(delay));
+    }
+
+    @ConfigPath({"teleport", "teleporting", "to-player", "delayed"})
+    default String getTeleportingDelayedTo() {
+        return "&a{player} will be teleported to you in &f{delay} &aseconds";
+    }
+
+    default String getTeleportingDelayedTo(Player player, int delay) {
+        return getTeleportingDelayedTo().replace("{player}", player.getName()).replace("{delay}", String.valueOf(delay));
     }
 
     @ConfigPath({"error", "player-not-found"})
@@ -40,6 +58,21 @@ public interface MessageConfig {
     @ConfigPath({"error", "already-sent"})
     default String getAlreadySent() {
         return "&cYou have already sent a request to this player";
+    }
+
+    @ConfigPath({"error", "no-request"})
+    default String getNoRequest() {
+        return "&cYou don't have any request";
+    }
+
+    @ConfigPath({"error", "teleport", "offline"})
+    default String getTeleportOffline() {
+        return "&cThe player is offline";
+    }
+
+    @ConfigPath({"error", "teleport", "in-teleport"})
+    default String getTeleportInTeleport() {
+        return "&cThe player is in teleport";
     }
 
     @ConfigPath({"request", "sent"})
@@ -72,5 +105,23 @@ public interface MessageConfig {
     @ConfigPath({"request", "received", "note"})
     default String getRequestReceivedNote() {
         return "&aType &f/tpaccept &ato accept or &f/tpdeny &ato deny";
+    }
+
+    @ConfigPath({"request", "deny", "from"})
+    default String getRequestDenyFrom() {
+        return "&c{player} &chas denied your request";
+    }
+
+    default String getRequestDenyFrom(Player player) {
+        return getRequestDenyFrom().replace("{player}", player.getName());
+    }
+
+    @ConfigPath({"request", "deny", "to"})
+    default String getRequestDenyTo() {
+        return "&cYou have denied the request from &f{player}";
+    }
+
+    default String getRequestDenyTo(Player player) {
+        return getRequestDenyTo().replace("{player}", player.getName());
     }
 }

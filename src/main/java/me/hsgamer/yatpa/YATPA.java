@@ -3,6 +3,8 @@ package me.hsgamer.yatpa;
 import me.hsgamer.hscore.bukkit.baseplugin.BasePlugin;
 import me.hsgamer.hscore.bukkit.config.BukkitConfig;
 import me.hsgamer.hscore.config.proxy.ConfigGenerator;
+import me.hsgamer.yatpa.command.TeleportAcceptCommand;
+import me.hsgamer.yatpa.command.TeleportDenyCommand;
 import me.hsgamer.yatpa.command.TeleportHereCommand;
 import me.hsgamer.yatpa.command.TeleportNormalCommand;
 import me.hsgamer.yatpa.config.MainConfig;
@@ -28,6 +30,8 @@ public final class YATPA extends BasePlugin {
 
         registerCommand(new TeleportNormalCommand(this));
         registerCommand(new TeleportHereCommand(this));
+        registerCommand(new TeleportAcceptCommand(this));
+        registerCommand(new TeleportDenyCommand(this));
     }
 
     @Override
