@@ -2,6 +2,7 @@ package me.hsgamer.yatpa;
 
 import me.hsgamer.hscore.bukkit.baseplugin.BasePlugin;
 import me.hsgamer.hscore.bukkit.config.BukkitConfig;
+import me.hsgamer.hscore.bukkit.utils.MessageUtils;
 import me.hsgamer.hscore.config.proxy.ConfigGenerator;
 import me.hsgamer.yatpa.command.TeleportAcceptCommand;
 import me.hsgamer.yatpa.command.TeleportDenyCommand;
@@ -21,6 +22,11 @@ public final class YATPA extends BasePlugin {
     private final MessageConfig messageConfig = ConfigGenerator.newInstance(MessageConfig.class, new BukkitConfig(this, "messages.yml"));
     private final RequestManager requestManager = new RequestManager();
     private final TeleportManager teleportManager = new TeleportManager(this);
+
+    @Override
+    public void load() {
+        MessageUtils.setPrefix(messageConfig::getPrefix);
+    }
 
     @Override
     public void enable() {

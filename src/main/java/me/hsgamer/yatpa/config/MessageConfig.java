@@ -4,6 +4,11 @@ import me.hsgamer.hscore.config.annotation.ConfigPath;
 import org.bukkit.entity.Player;
 
 public interface MessageConfig {
+    @ConfigPath("prefix")
+    default String getPrefix() {
+        return "&e[&6YATPA&e] ";
+    }
+
     @ConfigPath({"teleport", "teleporting", "from-player", "instant"})
     default String getTeleportingInstantFrom() {
         return "&aYou are being teleported to &f{player}";
