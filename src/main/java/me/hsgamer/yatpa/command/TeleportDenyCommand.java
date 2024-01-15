@@ -4,9 +4,9 @@ import me.hsgamer.hscore.bukkit.utils.MessageUtils;
 import me.hsgamer.yatpa.Permissions;
 import me.hsgamer.yatpa.YATPA;
 import me.hsgamer.yatpa.request.RequestEntry;
-import org.bukkit.entity.Player;
 
 import java.util.Collections;
+import java.util.UUID;
 
 public class TeleportDenyCommand extends TeleportResponseCommand {
     public TeleportDenyCommand(YATPA plugin) {
@@ -15,7 +15,7 @@ public class TeleportDenyCommand extends TeleportResponseCommand {
     }
 
     @Override
-    protected void execute(RequestEntry requestEntry, Player requester, Player target) {
+    protected void execute(RequestEntry requestEntry, UUID requester, UUID target) {
         MessageUtils.sendMessage(requester, plugin.getMessageConfig().getRequestDenyFrom(target));
         MessageUtils.sendMessage(target, plugin.getMessageConfig().getRequestDenyTo(requester));
     }

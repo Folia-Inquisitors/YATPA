@@ -1,7 +1,12 @@
 package me.hsgamer.yatpa.config;
 
 import me.hsgamer.hscore.config.annotation.ConfigPath;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+
+import java.util.Optional;
+import java.util.UUID;
 
 public interface MessageConfig {
     @ConfigPath("prefix")
@@ -126,8 +131,8 @@ public interface MessageConfig {
         return "&c{player} &chas denied your request";
     }
 
-    default String getRequestDenyFrom(Player player) {
-        return getRequestDenyFrom().replace("{player}", player.getName());
+    default String getRequestDenyFrom(UUID uuid) {
+        return getRequestDenyFrom().replace("{player}", Optional.of(Bukkit.getOfflinePlayer(uuid)).map(OfflinePlayer::getName).orElse(uuid.toString()));
     }
 
     @ConfigPath({"request", "deny", "to"})
@@ -135,7 +140,7 @@ public interface MessageConfig {
         return "&cYou have denied the request from &f{player}";
     }
 
-    default String getRequestDenyTo(Player player) {
-        return getRequestDenyTo().replace("{player}", player.getName());
+    default String getRequestDenyTo(UUID uuid) {
+        return getRequestDenyTo().replace("{player}", Optional.of(Bukkit.getOfflinePlayer(uuid)).map(OfflinePlayer::getName).orElse(uuid.toString()));
     }
 }
