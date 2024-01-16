@@ -22,6 +22,6 @@ public class TeleportHereCommand extends TeleportRequestCommand {
     @Override
     protected void sendTargetRequest(Player sender, Player targetPlayer) {
         MessageUtils.sendMessage(targetPlayer, plugin.getMessageConfig().getRequestReceivedHere(sender));
-        MessageUtils.sendMessage(sender, plugin.getMessageConfig().getRequestReceivedNote());
+        MessageUtils.sendMessage(targetPlayer, plugin.getMessageConfig().getRequestReceivedNote());
     }
 }
