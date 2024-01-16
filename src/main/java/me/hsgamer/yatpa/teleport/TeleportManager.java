@@ -62,7 +62,7 @@ public class TeleportManager {
                     teleportFuture = teleport.teleport(player, targetLocation);
                     return true;
                 } else {
-                    return teleportFuture.isDone();
+                    return !teleportFuture.isDone();
                 }
             }
         };
