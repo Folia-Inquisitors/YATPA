@@ -9,7 +9,9 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.BooleanSupplier;
 
 public class TeleportManager {
     private final Map<UUID, Task> inTeleportMap = new ConcurrentHashMap<>();
@@ -51,15 +53,31 @@ public class TeleportManager {
             return new TeleportResult(TeleportStatus.IN_TELEPORT, player, targetPlayer, targetLocation);
         }
 
+        BooleanSupplier teleportRunnable = new BooleanSupplier() {
+            private CompletableFuture<Boolean> teleportFuture;
+
+            @Override
+            public boolean getAsBoolean() {
+                if (teleportFuture == null) {
+                    teleportFuture = teleport.teleport(player, targetLocation);
+                    return true;
+                } else {
+                    return teleportFuture.isDone();
+                }
+            }
+        };
+
+        TeleportStatus status;
+        Task task;
         if (plugin.getMainConfig().hasTeleportDelay()) {
-            Task task = Scheduler.plugin(plugin).async().runTaskLater(() -> teleport.teleport(player, targetLocation), plugin.getMainConfig().teleportDelayTicks());
-            inTeleportMap.put(player.getUniqueId(), task);
-            return new TeleportResult(TeleportStatus.SUCCESS_DELAYED, player, targetPlayer, targetLocation);
+            status = TeleportStatus.SUCCESS_DELAYED;
+            task = Scheduler.plugin(plugin).async().runTaskTimer(teleportRunnable, plugin.getMainConfig().teleportDelayTicks(), 0L);
         } else {
-            Task task = Scheduler.plugin(plugin).async().runTask(() -> teleport.teleport(player, targetLocation));
-            inTeleportMap.put(player.getUniqueId(), task);
-            return new TeleportResult(TeleportStatus.SUCCESS, player, targetPlayer, targetLocation);
+            status = TeleportStatus.SUCCESS;
+            task = Scheduler.plugin(plugin).async().runTaskTimer(teleportRunnable, 0L, 0L);
         }
+        inTeleportMap.put(player.getUniqueId(), task);
+        return new TeleportResult(status, player, targetPlayer, targetLocation);
     }
 
     public boolean isInTeleport(Player player) {
