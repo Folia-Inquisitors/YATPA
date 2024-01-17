@@ -8,13 +8,11 @@ import me.hsgamer.yatpa.request.RequestType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TeleportRequestCommand extends Command {
+public abstract class TeleportRequestCommand extends Command implements PlayerTabComplete {
     protected final YATPA plugin;
 
     protected TeleportRequestCommand(YATPA plugin, @NotNull String name, @NotNull String description, @NotNull List<String> aliases) {
@@ -81,24 +79,5 @@ public abstract class TeleportRequestCommand extends Command {
         }
 
         return true;
-    }
-
-    @Override
-    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
-        if (args.length == 1) {
-            Player senderPlayer = sender instanceof Player ? (Player) sender : null;
-
-            ArrayList<String> matchedPlayers = new ArrayList<>();
-            for (Player player : sender.getServer().getOnlinePlayers()) {
-                String name = player.getName();
-                if ((senderPlayer == null || senderPlayer.canSee(player)) && StringUtil.startsWithIgnoreCase(name, args[0])) {
-                    matchedPlayers.add(name);
-                }
-            }
-
-            matchedPlayers.sort(String.CASE_INSENSITIVE_ORDER);
-            return matchedPlayers;
-        }
-        return super.tabComplete(sender, alias, args);
     }
 }
