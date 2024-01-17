@@ -15,7 +15,7 @@ public class CooldownManager {
     }
 
     public void addCooldown(UUID uuid) {
-        cooldownMap.put(uuid, System.currentTimeMillis() + plugin.getMainConfig().teleportCooldown());
+        cooldownMap.put(uuid, System.currentTimeMillis() + plugin.getMainConfig().teleportCooldownMillis());
     }
 
     public long getCooldownLeft(UUID uuid) {
