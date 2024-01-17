@@ -4,5 +4,6 @@ public enum TeleportStatus {
     SUCCESS,
     SUCCESS_DELAYED,
     OFFLINE,
-    IN_TELEPORT
+    IN_TELEPORT,
+    EXPIRED,
 }

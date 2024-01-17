@@ -41,4 +41,13 @@ public interface MainConfig {
     default int teleportEffectPeriod() {
         return 5;
     }
+
+    @ConfigPath({"teleport", "timeout"})
+    default int teleportTimeout() {
+        return 60;
+    }
+
+    default long teleportTimeoutMillis() {
+        return teleportTimeout() * 1000L;
+    }
 }

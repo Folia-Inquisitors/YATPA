@@ -85,6 +85,11 @@ public interface MessageConfig {
         return "&cThe player is in teleport";
     }
 
+    @ConfigPath({"error", "teleport", "expired"})
+    default String getTeleportExpired() {
+        return "&cThe request has expired";
+    }
+
     @ConfigPath({"error", "cooldown"})
     default String getCooldownLeft() {
         return "&cYou need to wait &f{cooldown} &cmore seconds to send a request";
