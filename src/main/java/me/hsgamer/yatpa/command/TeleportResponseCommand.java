@@ -2,6 +2,7 @@ package me.hsgamer.yatpa.command;
 
 import me.hsgamer.hscore.bukkit.utils.MessageUtils;
 import me.hsgamer.yatpa.YATPA;
+import me.hsgamer.yatpa.request.FetchRequestResult;
 import me.hsgamer.yatpa.request.RequestEntry;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -46,9 +47,14 @@ public abstract class TeleportResponseCommand extends Command {
             requestPlayer = null;
         }
 
-        Optional<RequestEntry> optionalRequestEntry = requestPlayer == null
-                ? plugin.getRequestManager().getAndRemoveLatestRequest(targetPlayer.getUniqueId())
-                : plugin.getRequestManager().getAndRemoveRequest(targetPlayer.getUniqueId(), requestPlayer.getUniqueId());
+        FetchRequestResult fetchRequestResult = plugin.getRequestManager().getRequest(targetPlayer.getUniqueId(), requestPlayer == null ? null : requestPlayer.getUniqueId());
+
+        if (fetchRequestResult.hasManyRequests() && plugin.getMainConfig().requestErrorIfTooMany()) {
+            MessageUtils.sendMessage(sender, plugin.getMessageConfig().getTooManyRequests());
+            return false;
+        }
+
+        Optional<RequestEntry> optionalRequestEntry = fetchRequestResult.getLatestRequest();
 
         if (!optionalRequestEntry.isPresent()) {
             MessageUtils.sendMessage(sender, plugin.getMessageConfig().getNoRequest());

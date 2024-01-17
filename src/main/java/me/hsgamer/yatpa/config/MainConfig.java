@@ -42,12 +42,17 @@ public interface MainConfig {
         return 5;
     }
 
-    @ConfigPath({"teleport", "timeout"})
-    default int teleportTimeout() {
+    @ConfigPath({"request", "timeout"})
+    default int requestTimeout() {
         return 60;
     }
 
     default long teleportTimeoutMillis() {
-        return teleportTimeout() * 1000L;
+        return requestTimeout() * 1000L;
+    }
+
+    @ConfigPath({"request", "error-if-too-many"})
+    default boolean requestErrorIfTooMany() {
+        return false;
     }
 }

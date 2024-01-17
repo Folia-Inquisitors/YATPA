@@ -85,11 +85,6 @@ public interface MessageConfig {
         return "&cThe player is in teleport";
     }
 
-    @ConfigPath({"error", "teleport", "expired"})
-    default String getTeleportExpired() {
-        return "&cThe request has expired";
-    }
-
     @ConfigPath({"error", "cooldown"})
     default String getCooldownLeft() {
         return "&cYou need to wait &f{cooldown} &cmore seconds to send a request";
@@ -97,6 +92,11 @@ public interface MessageConfig {
 
     default String getCooldownLeft(long cooldown) {
         return getCooldownLeft().replace("{cooldown}", String.valueOf(cooldown / 1000));
+    }
+
+    @ConfigPath({"error", "too-many-requests"})
+    default String getTooManyRequests() {
+        return "&cYou have too many requests. Please specify a player.";
     }
 
     @ConfigPath({"request", "sent"})

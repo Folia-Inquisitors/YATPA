@@ -31,11 +31,6 @@ public class TeleportManager {
             return new TeleportResult(TeleportStatus.OFFLINE, null, null, null);
         }
 
-        long timeout = plugin.getMainConfig().teleportTimeoutMillis();
-        if (timeout > 0 && requestEntry.timestamp + timeout < System.currentTimeMillis()) {
-            return new TeleportResult(TeleportStatus.EXPIRED, null, null, null);
-        }
-
         Player player;
         Player targetPlayer;
         Location targetLocation;

@@ -21,7 +21,7 @@ import java.util.List;
 public final class YATPA extends BasePlugin {
     private final MainConfig mainConfig = ConfigGenerator.newInstance(MainConfig.class, new BukkitConfig(this, "config.yml"));
     private final MessageConfig messageConfig = ConfigGenerator.newInstance(MessageConfig.class, new BukkitConfig(this, "messages.yml"));
-    private final RequestManager requestManager = new RequestManager();
+    private final RequestManager requestManager = new RequestManager(this);
     private final TeleportManager teleportManager = new TeleportManager(this);
     private final CooldownManager cooldownManager = new CooldownManager(this);
 

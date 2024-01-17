@@ -22,9 +22,6 @@ public class TeleportAcceptCommand extends TeleportResponseCommand {
             case OFFLINE:
                 MessageUtils.sendMessage(target, plugin.getMessageConfig().getTeleportOffline());
                 break;
-            case EXPIRED:
-                MessageUtils.sendMessage(target, plugin.getMessageConfig().getTeleportExpired());
-                break;
             case IN_TELEPORT:
                 MessageUtils.sendMessage(requester, plugin.getMessageConfig().getTeleportInTeleport());
                 MessageUtils.sendMessage(target, plugin.getMessageConfig().getTeleportInTeleport());
