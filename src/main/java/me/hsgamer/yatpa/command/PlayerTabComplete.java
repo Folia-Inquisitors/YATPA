@@ -11,7 +11,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 public interface PlayerTabComplete {
-    default @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
+    static @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
         if (args.length == 1) {
             String argName = args[0];
             return Bukkit.getOnlinePlayers().stream()

@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public abstract class TeleportRequestCommand extends Command implements PlayerTabComplete {
+public abstract class TeleportRequestCommand extends Command {
     protected final YATPA plugin;
 
     protected TeleportRequestCommand(YATPA plugin, @NotNull String name, @NotNull String description, @NotNull List<String> aliases) {
@@ -79,5 +79,10 @@ public abstract class TeleportRequestCommand extends Command implements PlayerTa
         }
 
         return true;
+    }
+
+    @Override
+    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
+        return PlayerTabComplete.tabComplete(sender, alias, args);
     }
 }

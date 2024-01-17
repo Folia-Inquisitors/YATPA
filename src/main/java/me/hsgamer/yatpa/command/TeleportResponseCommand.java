@@ -3,19 +3,16 @@ package me.hsgamer.yatpa.command;
 import me.hsgamer.hscore.bukkit.utils.MessageUtils;
 import me.hsgamer.yatpa.YATPA;
 import me.hsgamer.yatpa.request.RequestEntry;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
-public abstract class TeleportResponseCommand extends Command implements PlayerTabComplete {
+public abstract class TeleportResponseCommand extends Command {
     protected final YATPA plugin;
 
     protected TeleportResponseCommand(YATPA plugin, @NotNull String name, @NotNull String description, @NotNull List<String> aliases) {
@@ -65,13 +62,6 @@ public abstract class TeleportResponseCommand extends Command implements PlayerT
 
     @Override
     public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
-        if (args.length == 1) {
-            String argName = args[0];
-            return Bukkit.getOnlinePlayers().stream()
-                    .map(Player::getName)
-                    .filter(name -> name.toLowerCase(Locale.ROOT).startsWith(argName.toLowerCase(Locale.ROOT)))
-                    .collect(Collectors.toList());
-        }
-        return super.tabComplete(sender, alias, args);
+        return PlayerTabComplete.tabComplete(sender, alias, args);
     }
 }
