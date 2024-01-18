@@ -63,6 +63,7 @@ public abstract class TeleportResponseCommand extends Command {
 
         RequestEntry requestEntry = optionalRequestEntry.get();
         execute(requestEntry, requestEntry.requester, requestEntry.target);
+        requestEntry.setDone(true);
         return true;
     }
 

@@ -18,7 +18,7 @@ public class RequestManager {
 
     private boolean isValid(RequestEntry requestEntry) {
         long timeout = plugin.getMainConfig().teleportTimeoutMillis();
-        return timeout > 0 && requestEntry.timestamp + timeout > System.currentTimeMillis();
+        return (timeout <= 0 || requestEntry.timestamp + timeout > System.currentTimeMillis()) && !requestEntry.isDone();
     }
 
     public RequestStatus request(RequestEntry requestEntry) {
