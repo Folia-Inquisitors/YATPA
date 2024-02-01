@@ -3,6 +3,7 @@ package me.hsgamer.yatpa.request;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import me.hsgamer.yatpa.YATPA;
+import me.hsgamer.yatpa.event.TeleportRequestEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -28,6 +29,12 @@ public class RequestManager {
         RequestEntry currentRequest = requestTable.get(requester, target);
         if (currentRequest != null && isValid(currentRequest)) {
             return RequestStatus.ALREADY_SENT;
+        }
+
+        TeleportRequestEvent event = new TeleportRequestEvent(requestEntry);
+        plugin.getServer().getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            return RequestStatus.CANCELLED;
         }
 
         requestTable.put(requester, target, requestEntry);
