@@ -1,6 +1,10 @@
 # YATPA
 Website: https://www.spigotmc.org/resources/yatpa.115050/
 
+# Official Discord 
+
+https://discord.gg/aT9z7q7hX8
+
 ## Building instructions
 
 mvn clean install
