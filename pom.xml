@@ -109,11 +109,17 @@
             <artifactId>hscore-bukkit-config</artifactId>
             <version>${core.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
             <artifactId>XSeries</artifactId>
             <version>9.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>me.chrommob</groupId>
+            <artifactId>fakeplayer</artifactId>
+            <scope>system</scope>
+            <version>1.0-SNAPSHOT</version>
+            <systemPath>${project.basedir}/libs/FakePlayer-1.0-SNAPSHOT-all.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
