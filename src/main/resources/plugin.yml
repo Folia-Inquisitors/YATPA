@@ -5,3 +5,4 @@ authors: [ HSGamer ]
 description: Yet Another TPA plugin
 folia-supported: true
 api-version: 1.13
+softdepend: [ GrimAC ]
