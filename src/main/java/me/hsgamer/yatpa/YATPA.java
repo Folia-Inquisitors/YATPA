@@ -11,6 +11,8 @@ import me.hsgamer.yatpa.command.TeleportNormalCommand;
 import me.hsgamer.yatpa.config.MainConfig;
 import me.hsgamer.yatpa.config.MessageConfig;
 import me.hsgamer.yatpa.cooldown.CooldownManager;
+import me.hsgamer.yatpa.hook.HookManager;
+import me.hsgamer.yatpa.hook.impl.GrimACHook;
 import me.hsgamer.yatpa.listener.PlayerListener;
 import me.hsgamer.yatpa.request.RequestManager;
 import me.hsgamer.yatpa.teleport.TeleportManager;
@@ -40,6 +42,13 @@ public final class YATPA extends BasePlugin {
         registerCommand(new TeleportHereCommand(this));
         registerCommand(new TeleportAcceptCommand(this));
         registerCommand(new TeleportDenyCommand(this));
+
+        HookManager hookManager = new HookManager(this);
+        hookManager.addHook("GrimAC", GrimACHook.class);
+        hookManager.registerAll();
+        hookManager.getRegisteredHooks().forEach((hook) -> {
+            getLogger().info("Enabled a Hook for " + hook.getHookPlugin());
+        });
     }
 
     @Override

@@ -3,6 +3,7 @@ package me.hsgamer.yatpa.teleport;
 import me.hsgamer.hscore.bukkit.scheduler.Scheduler;
 import me.hsgamer.hscore.bukkit.scheduler.Task;
 import me.hsgamer.yatpa.YATPA;
+import me.hsgamer.yatpa.event.PostTeleportEvent;
 import me.hsgamer.yatpa.request.RequestEntry;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -60,6 +61,8 @@ public class TeleportManager {
             public boolean getAsBoolean() {
                 if (teleportFuture == null) {
                     teleportFuture = teleport.teleport(player, targetLocation);
+                    PostTeleportEvent event = new PostTeleportEvent(requestEntry);
+                    plugin.getServer().getPluginManager().callEvent(event);
                     return true;
                 } else {
                     return !teleportFuture.isDone();
@@ -103,11 +106,11 @@ public class TeleportManager {
                 }
 
                 Scheduler.plugin(plugin)
-                        .sync()
-                        .runEntityTask(
-                                player,
-                                () -> plugin.getMainConfig().teleportEffect().forEach(effect -> effect.apply(player))
-                        );
+                         .sync()
+                         .runEntityTask(
+                                 player,
+                                 () -> plugin.getMainConfig().teleportEffect().forEach(effect -> effect.apply(player))
+                         );
             }
         }, effectPeriod, effectPeriod);
     }
