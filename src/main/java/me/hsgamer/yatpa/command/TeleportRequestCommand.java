@@ -1,5 +1,6 @@
 package me.hsgamer.yatpa.command;
 
+import me.chrommob.fakeplayer.api.FakePlayerAPI;
 import me.hsgamer.hscore.bukkit.utils.MessageUtils;
 import me.hsgamer.yatpa.YATPA;
 import me.hsgamer.yatpa.request.RequestEntry;
@@ -11,11 +12,13 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Set;
 
 public abstract class TeleportRequestCommand extends Command {
     protected final YATPA plugin;
 
-    protected TeleportRequestCommand(YATPA plugin, @NotNull String name, @NotNull String description, @NotNull List<String> aliases) {
+    protected TeleportRequestCommand(YATPA plugin, @NotNull String name, @NotNull String description,
+                                     @NotNull List<String> aliases) {
         super(name, description, "/" + name + " <player>", aliases);
         this.plugin = plugin;
     }
@@ -50,9 +53,17 @@ public abstract class TeleportRequestCommand extends Command {
 
         Player targetPlayer = sender.getServer().getPlayer(args[0]);
 
-        if (targetPlayer == null) {
+        Set<String> fakePlayerNames = FakePlayerAPI.getInstance().getFakePlayerNames();
+
+        if (targetPlayer == null && !fakePlayerNames.contains(args[0])) {
             MessageUtils.sendMessage(sender, plugin.getMessageConfig().getPlayerNotFound());
             return false;
+        }
+
+        if (targetPlayer == null) {
+            MessageUtils.sendMessage(sender, plugin.getMessageConfig().getRequestSent(targetPlayer));
+            plugin.getCooldownManager().addCooldown(senderPlayer.getUniqueId());
+            return true;
         }
 
         if (targetPlayer.equals(senderPlayer)) {
@@ -62,7 +73,8 @@ public abstract class TeleportRequestCommand extends Command {
 
         RequestType requestType = getRequestType();
 
-        RequestEntry requestEntry = new RequestEntry(senderPlayer.getUniqueId(), targetPlayer.getUniqueId(), requestType);
+        RequestEntry requestEntry = new RequestEntry(senderPlayer.getUniqueId(), targetPlayer.getUniqueId(),
+                requestType);
 
         RequestStatus requestStatus = plugin.getRequestManager().request(requestEntry);
         switch (requestStatus) {
@@ -82,7 +94,8 @@ public abstract class TeleportRequestCommand extends Command {
     }
 
     @Override
-    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
+    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias,
+                                             @NotNull String[] args) throws IllegalArgumentException {
         return PlayerTabComplete.tabComplete(sender, alias, args);
     }
 }

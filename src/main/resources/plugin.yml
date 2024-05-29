@@ -1,6 +1,7 @@
 name: YATPA
 version: '${project.version}'
 main: me.hsgamer.yatpa.YATPA
+depend: [ FakePlayer ]
 authors: [ HSGamer ]
 description: Yet Another TPA plugin
 folia-supported: true
