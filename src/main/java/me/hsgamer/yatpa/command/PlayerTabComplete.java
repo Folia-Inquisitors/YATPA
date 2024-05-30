@@ -23,6 +23,7 @@ public interface PlayerTabComplete {
             FakePlayerAPI.getInstance().getFakePlayerNames().stream()
                     .filter(name -> name.toLowerCase(Locale.ROOT).startsWith(argName.toLowerCase(Locale.ROOT)))
                     .forEach(players::add);
+            return players;
         }
         return Collections.emptyList();
     }
