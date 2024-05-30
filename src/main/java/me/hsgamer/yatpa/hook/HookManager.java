@@ -18,9 +18,7 @@ public class HookManager {
     }
 
     public void addHook(String pluginName, Class<? extends Hook> hookClass) {
-        if (!Bukkit.getPluginManager().isPluginEnabled(pluginName)) {
-            throw new IllegalArgumentException("Cannot add a Hook because plugin " + pluginName + " isn't loaded");
-        }
+        if (!Bukkit.getPluginManager().isPluginEnabled(pluginName)) return;
         try {
             Hook hook = hookClass.getDeclaredConstructor(YATPA.class, String.class).newInstance(plugin, pluginName);
             registeredHooks.add(hook);
