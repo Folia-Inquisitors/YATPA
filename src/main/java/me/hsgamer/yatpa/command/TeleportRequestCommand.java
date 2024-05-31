@@ -61,7 +61,7 @@ public abstract class TeleportRequestCommand extends Command {
         }
 
         if (targetPlayer == null) {
-            MessageUtils.sendMessage(sender, plugin.getMessageConfig().getRequestSent(targetPlayer));
+            MessageUtils.sendMessage(sender, plugin.getMessageConfig().getRequestSent(args[0]));
             plugin.getCooldownManager().addCooldown(senderPlayer.getUniqueId());
             return true;
         }

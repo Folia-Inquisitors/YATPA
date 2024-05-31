@@ -108,6 +108,10 @@ public interface MessageConfig {
         return getRequestSent().replace("{player}", player.getName());
     }
 
+    default String getRequestSent(String name) {
+        return getRequestSent().replace("{player}", name);
+    }
+
     @ConfigPath({"request", "received", "normal"})
     default String getRequestReceived() {
         return "&f{player} &ahas requested to teleport to you";
