@@ -5,6 +5,7 @@ import me.hsgamer.hscore.bukkit.scheduler.Task;
 import me.hsgamer.yatpa.YATPA;
 import me.hsgamer.yatpa.event.PostTeleportEvent;
 import me.hsgamer.yatpa.request.RequestEntry;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -62,7 +63,7 @@ public class TeleportManager {
                 if (teleportFuture == null) {
                     teleportFuture = teleport.teleport(player, targetLocation);
                     PostTeleportEvent event = new PostTeleportEvent(requestEntry);
-                    plugin.getServer().getPluginManager().callEvent(event);
+                    plugin.getServer().getGlobalRegionScheduler().run(plugin, consumer -> Bukkit.getServer().getPluginManager().callEvent(event));
                     return true;
                 } else {
                     return !teleportFuture.isDone();
