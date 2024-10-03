@@ -33,7 +33,7 @@ public interface MainConfig {
     @ConfigPath(value = {"teleport", "effect", "value"}, converter = PotionEffectListConverter.class)
     default List<XPotion.Effect> teleportEffect() {
         return Collections.singletonList(
-                new XPotion.Effect(XPotion.DAMAGE_RESISTANCE.buildPotionEffect(1, 5), 100)
+                new XPotion.Effect(XPotion.RESISTANCE.buildPotionEffect(1, 5), 100)
         );
     }
 
