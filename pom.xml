@@ -119,11 +119,5 @@
             <artifactId>XSeries</artifactId>
             <version>9.8.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.MWHunter</groupId>
-            <artifactId>GrimAPI</artifactId>
-            <version>9f5aaef</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 </project>
