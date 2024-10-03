@@ -60,9 +60,9 @@ public class TeleportManager {
             @Override
             public boolean getAsBoolean() {
                 if (teleportFuture == null) {
+                    plugin.getServer().getPluginManager().callEvent(new PostTeleportEvent(requestEntry));
                     teleportFuture = teleport.teleport(player, targetLocation);
-                    PostTeleportEvent event = new PostTeleportEvent(requestEntry);
-                    plugin.getServer().getPluginManager().callEvent(event);
+                    teleportFuture.whenComplete((result, throwable) -> plugin.getServer().getPluginManager().callEvent(new PostTeleportEvent(requestEntry)));
                     return true;
                 } else {
                     return !teleportFuture.isDone();
