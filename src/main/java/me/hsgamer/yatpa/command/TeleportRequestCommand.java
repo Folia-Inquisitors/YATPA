@@ -2,6 +2,7 @@ package me.hsgamer.yatpa.command;
 
 import me.hsgamer.hscore.bukkit.utils.MessageUtils;
 import me.hsgamer.yatpa.YATPA;
+import me.hsgamer.yatpa.event.PreTeleportRequestEvent;
 import me.hsgamer.yatpa.request.RequestEntry;
 import me.hsgamer.yatpa.request.RequestStatus;
 import me.hsgamer.yatpa.request.RequestType;
@@ -48,7 +49,14 @@ public abstract class TeleportRequestCommand extends Command {
             return false;
         }
 
-        Player targetPlayer = sender.getServer().getPlayer(args[0]);
+        String targetName = args[0];
+        Player targetPlayer = sender.getServer().getPlayer(targetName);
+
+        PreTeleportRequestEvent preTeleportRequestEvent = new PreTeleportRequestEvent(senderPlayer, targetName, targetPlayer);
+        plugin.getServer().getPluginManager().callEvent(preTeleportRequestEvent);
+        if (preTeleportRequestEvent.isCancelled()) {
+            return false;
+        }
 
         if (targetPlayer == null) {
             MessageUtils.sendMessage(sender, plugin.getMessageConfig().getPlayerNotFound());

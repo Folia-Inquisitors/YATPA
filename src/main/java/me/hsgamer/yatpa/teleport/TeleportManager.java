@@ -106,11 +106,11 @@ public class TeleportManager {
                 }
 
                 Scheduler.plugin(plugin)
-                         .sync()
-                         .runEntityTask(
-                                 player,
-                                 () -> plugin.getMainConfig().teleportEffect().forEach(effect -> effect.apply(player))
-                         );
+                        .sync()
+                        .runEntityTask(
+                                player,
+                                () -> plugin.getMainConfig().teleportEffect().forEach(effect -> effect.apply(player))
+                        );
             }
         }, effectPeriod, effectPeriod);
     }
