@@ -20,7 +20,7 @@ public class PreTeleportRequestEvent extends Event implements Cancellable {
         this.targetPlayer = targetPlayer;
     }
 
-    public static HandlerList getHANDLERS() {
+    public static HandlerList getHandlerList() {
         return HANDLERS;
     }
 
