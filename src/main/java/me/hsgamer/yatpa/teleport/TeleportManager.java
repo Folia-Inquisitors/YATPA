@@ -13,6 +13,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BooleanSupplier;
+import java.util.logging.Level;
 
 public class TeleportManager {
     private final Map<UUID, Task> inTeleportMap = new ConcurrentHashMap<>();
@@ -62,7 +63,13 @@ public class TeleportManager {
                 if (teleportFuture == null) {
                     plugin.getServer().getPluginManager().callEvent(new PostTeleportEvent(requestEntry));
                     teleportFuture = teleport.teleport(player, targetLocation);
-                    teleportFuture.whenComplete((result, throwable) -> plugin.getServer().getPluginManager().callEvent(new PostTeleportEvent(requestEntry)));
+                    teleportFuture
+                            .thenAcceptAsync(result -> plugin.getServer().getPluginManager().callEvent(new PostTeleportEvent(requestEntry)))
+                            .whenComplete((v, throwable) -> {
+                                if (throwable != null) {
+                                    plugin.getLogger().log(Level.SEVERE, "An error occurred while teleporting", throwable);
+                                }
+                            });
                     return true;
                 } else {
                     return !teleportFuture.isDone();

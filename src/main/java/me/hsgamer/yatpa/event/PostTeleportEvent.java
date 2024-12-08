@@ -10,6 +10,7 @@ public class PostTeleportEvent extends Event {
     private final RequestEntry requestEntry;
 
     public PostTeleportEvent(RequestEntry requestEntry) {
+        super(true);
         this.requestEntry = requestEntry;
     }
 
