@@ -11,7 +11,7 @@ mvn clean install
  
 ## Description
 
-This allows people to tpa to each other. This is meant to be a simple plugin for servers. It is highly optimized and heavily tested. Feel free to constribute.
+This allows people to tpa to each other. This is meant to be a simple plugin for servers. It is highly optimized and heavily tested. Feel free to contribute.
 
 ### Player commands 
 
