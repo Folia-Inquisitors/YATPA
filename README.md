@@ -87,7 +87,7 @@ prefix: '&e[&6TPA Feature&e] '
 
 ## Soft Dependendencies
 
-- [GrimYATPA](https://github.com/Folia-Inquisitors/GrimYATPA) *Purpose: Disables teleportation checks when using [Grim](https://github.com/GrimAnticheat/Grim)
+- [GrimYATPA](https://github.com/Folia-Inquisitors/GrimYATPA) *Purpose: Disables teleportation checks when using [Grim](https://github.com/GrimAnticheat/Grim)*
 - [FakePlayer](https://github.com/Folia-Inquisitors/FakePlayer) *Purpose: Adds fake players to the game*
 - [FakePlayerAPI](https://github.com/Folia-Inquisitors/FakePlayerAPI) *Purpose: Shows Player count on velocity*
 - [FakePlayerYATPA](https://github.com/Folia-Inquisitors/FakePlayerYATPA) *Purpose: Disables the ability to teleport to fake players*
