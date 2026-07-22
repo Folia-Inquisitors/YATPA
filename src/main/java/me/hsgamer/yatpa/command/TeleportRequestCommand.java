@@ -3,6 +3,7 @@ package me.hsgamer.yatpa.command;
 import me.hsgamer.hscore.bukkit.utils.MessageUtils;
 import me.hsgamer.yatpa.YATPA;
 import me.hsgamer.yatpa.event.PreTeleportRequestEvent;
+import me.hsgamer.yatpa.request.FetchRequestResult;
 import me.hsgamer.yatpa.request.RequestEntry;
 import me.hsgamer.yatpa.request.RequestStatus;
 import me.hsgamer.yatpa.request.RequestType;
@@ -12,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Optional;
 
 public abstract class TeleportRequestCommand extends Command {
     protected final YATPA plugin;
@@ -69,8 +71,20 @@ public abstract class TeleportRequestCommand extends Command {
         }
 
         RequestType requestType = getRequestType();
-
         RequestEntry requestEntry = new RequestEntry(senderPlayer.getUniqueId(), targetPlayer.getUniqueId(), requestType);
+
+        FetchRequestResult reverseRequestResult = plugin.getRequestManager().getRequest(senderPlayer.getUniqueId(), targetPlayer.getUniqueId());
+        Optional<RequestEntry> optionalReverseRequest = reverseRequestResult.getLatestRequest();
+        if (optionalReverseRequest.isPresent()) {
+            RequestEntry reverseRequest = optionalReverseRequest.get();
+            if (reverseRequest.type != requestType) {
+                RequestEntry hereRequest = requestType == RequestType.HERE ? requestEntry : reverseRequest;
+                TeleportAcceptCommand.accept(plugin, hereRequest, hereRequest.requester, hereRequest.target);
+                reverseRequest.setDone(true);
+                plugin.getCooldownManager().addCooldown(senderPlayer.getUniqueId());
+                return true;
+            }
+        }
 
         RequestStatus requestStatus = plugin.getRequestManager().request(requestEntry);
         switch (requestStatus) {

@@ -10,7 +10,7 @@ import java.util.Collections;
 
 public class TeleportHereCommand extends TeleportRequestCommand {
     public TeleportHereCommand(YATPA plugin) {
-        super(plugin, "tpahere", "Request to teleport a player to you", Collections.emptyList());
+        super(plugin, "tpahere", "Request to teleport a player to you", Collections.singletonList("tpah"));
         setPermission(Permissions.TPA_HERE.getName());
     }
 

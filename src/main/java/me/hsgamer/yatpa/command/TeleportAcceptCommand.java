@@ -17,6 +17,10 @@ public class TeleportAcceptCommand extends TeleportResponseCommand {
 
     @Override
     protected void execute(RequestEntry requestEntry, UUID requester, UUID target) {
+        accept(plugin, requestEntry, requester, target);
+    }
+
+    static void accept(YATPA plugin, RequestEntry requestEntry, UUID requester, UUID target) {
         TeleportResult teleportResult = plugin.getTeleportManager().teleport(requestEntry);
         switch (teleportResult.status) {
             case OFFLINE:
