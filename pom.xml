@@ -14,6 +14,7 @@
     <description>Yet Another TPA plugin</description>
     <properties>
         <java.version>1.8</java.version>
+        <craftux.version>1.6.3</craftux.version>
         <core.version>4.3.26</core.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -46,6 +47,10 @@
                                 <relocation>
                                     <pattern>me.hsgamer.hscore</pattern>
                                     <shadedPattern>me.hsgamer.yatpa.lib.core</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>io.github.projectunified.craftux</pattern>
+                                    <shadedPattern>me.hsgamer.yatpa.lib.craftux</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>com.cryptomorin.xseries</pattern>
@@ -112,6 +117,17 @@
             <groupId>me.hsgamer</groupId>
             <artifactId>hscore-bukkit-config</artifactId>
             <version>${core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.projectunified</groupId>
+            <artifactId>craftux-spigot</artifactId>
+            <version>${craftux.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.projectunified</groupId>
+            <artifactId>craftux-simple</artifactId>
+            <version>${craftux.version}</version>
         </dependency>
 
         <dependency>

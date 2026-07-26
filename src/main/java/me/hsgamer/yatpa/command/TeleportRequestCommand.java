@@ -29,6 +29,9 @@ public abstract class TeleportRequestCommand extends Command {
 
     @Override
     public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
+        if (!plugin.isEnabled()) {
+            return false;
+        }
         if (!testPermission(sender)) {
             return false;
         }

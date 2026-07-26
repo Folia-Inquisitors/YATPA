@@ -6,6 +6,8 @@ import me.hsgamer.yatpa.YATPA;
 import me.hsgamer.yatpa.event.TeleportRequestEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class RequestManager {
@@ -68,5 +70,16 @@ public class RequestManager {
         }
 
         return new FetchRequestResult(latestRequest, hasManyRequests);
+    }
+
+    public List<RequestEntry> getRequests(UUID target) {
+        List<RequestEntry> requests = new ArrayList<>();
+        for (RequestEntry requestEntry : requestTable.column(target).values()) {
+            if (isValid(requestEntry)) {
+                requests.add(requestEntry);
+            }
+        }
+        requests.sort((first, second) -> Long.compare(second.timestamp, first.timestamp));
+        return requests;
     }
 }

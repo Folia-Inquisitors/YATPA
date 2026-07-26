@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface MessageConfig {
+public interface MessageConfig extends GuiMessageConfig {
     @ConfigPath("prefix")
     default String getPrefix() {
         return "&e[&6YATPA&e] ";

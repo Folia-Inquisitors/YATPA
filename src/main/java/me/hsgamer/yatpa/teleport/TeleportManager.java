@@ -123,7 +123,10 @@ public class TeleportManager {
     }
 
     public void stop() {
-        effectTask.cancel();
+        if (effectTask != null) {
+            effectTask.cancel();
+            effectTask = null;
+        }
         inTeleportMap.values().forEach(Task::cancel);
         inTeleportMap.clear();
     }
