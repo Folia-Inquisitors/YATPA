@@ -1,17 +1,17 @@
 # YATPA
 Website: https://www.spigotmc.org/resources/yatpa.115050/
 
-# Official Discord 
+## Description
 
-https://discord.gg/aT9z7q7hX8
+This allows people to tpa to each other. This is meant to be a simple plugin for servers. It is highly optimized and heavily tested. Feel free to contribute.
 
 ## Building instructions
 
 mvn clean install
- 
-## Description
 
-This allows people to tpa to each other. This is meant to be a simple plugin for servers. It is highly optimized and heavily tested. Feel free to contribute.
+# Official Discord 
+
+https://discord.gg/aT9z7q7hX8
 
 ### Player commands 
 
@@ -92,10 +92,6 @@ prefix: '&e[&6TPA Feature&e] '
 - [FakePlayerAPI](https://github.com/Folia-Inquisitors/FakePlayerAPI) *Purpose: Shows Player count on velocity*
 - [FakePlayerYATPA](https://github.com/Folia-Inquisitors/FakePlayerYATPA) *Purpose: Disables the ability to teleport to fake players*
   
-
-
-
-
 
 ### Folia inquisitors
 
