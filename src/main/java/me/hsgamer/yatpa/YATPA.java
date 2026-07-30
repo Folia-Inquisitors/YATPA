@@ -49,8 +49,8 @@ public final class YATPA extends BasePlugin {
         registerListener(new PlayerListener(this));
         registerListener(new SpigotInventoryUIListener(this));
 
-        registerCommand(new TeleportNormalCommand(this));
-        registerCommand(new TeleportHereCommand(this));
+        registerCommand(new TeleportNormalCommand(this, teleportGuiManager::openNormalPlayers));
+        registerCommand(new TeleportHereCommand(this, teleportGuiManager::openHerePlayers));
         registerCommand(new TeleportAcceptCommand(this));
         registerCommand(new TeleportDenyCommand(this));
         registerCommand(new TeleportGuiCommand(this, "tp-gui", "Open the teleport request GUI", null, teleportGuiManager::openTeleportMenu));
@@ -75,7 +75,7 @@ public final class YATPA extends BasePlugin {
             Method getCommandMap = getServer().getClass().getMethod("getCommandMap");
             CommandMap commandMap = (CommandMap) getCommandMap.invoke(getServer());
             String[] labels = {
-                    "tpa", "tpahere", "tpah", "tpaccept", "tpyes",
+                    "tpa", "tpahere", "tpah", "tph", "tpaccept", "tpyes",
                     "tpdeny", "tpno", "tp-gui", "tpyes-gui", "tpno-gui"
             };
             Set<Command> staleCommands = new HashSet<>();

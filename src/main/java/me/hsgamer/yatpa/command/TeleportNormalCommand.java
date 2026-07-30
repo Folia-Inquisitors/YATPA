@@ -7,10 +7,11 @@ import me.hsgamer.yatpa.request.RequestType;
 import org.bukkit.entity.Player;
 
 import java.util.Collections;
+import java.util.function.Consumer;
 
 public class TeleportNormalCommand extends TeleportRequestCommand {
-    public TeleportNormalCommand(YATPA plugin) {
-        super(plugin, "tpa", "Request a teleport to the player", Collections.emptyList());
+    public TeleportNormalCommand(YATPA plugin, Consumer<Player> guiAction) {
+        super(plugin, "tpa", "Request a teleport to the player", Collections.emptyList(), guiAction);
         setPermission(Permissions.TPA.getName());
     }
 

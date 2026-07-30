@@ -50,6 +50,14 @@ public class TeleportGuiManager {
         open(player, messages.getGuiTeleportMenuTitle(), 9, mask);
     }
 
+    public void openNormalPlayers(Player player) {
+        openPlayers(player, RequestType.NORMAL, 0);
+    }
+
+    public void openHerePlayers(Player player) {
+        openPlayers(player, RequestType.HERE, 0);
+    }
+
     public void openAcceptRequests(Player player) {
         openRequests(player, RequestAction.ACCEPT, 0);
     }

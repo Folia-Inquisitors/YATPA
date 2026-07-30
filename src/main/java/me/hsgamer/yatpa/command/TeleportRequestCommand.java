@@ -14,13 +14,22 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public abstract class TeleportRequestCommand extends Command {
     protected final YATPA plugin;
+    private final Consumer<Player> guiAction;
 
-    protected TeleportRequestCommand(YATPA plugin, @NotNull String name, @NotNull String description, @NotNull List<String> aliases) {
-        super(name, description, "/" + name + " <player>", aliases);
+    protected TeleportRequestCommand(
+            YATPA plugin,
+            @NotNull String name,
+            @NotNull String description,
+            @NotNull List<String> aliases,
+            Consumer<Player> guiAction
+    ) {
+        super(name, description, "/" + name + " [player]", aliases);
         this.plugin = plugin;
+        this.guiAction = guiAction;
     }
 
     protected abstract RequestType getRequestType();
@@ -41,12 +50,12 @@ public abstract class TeleportRequestCommand extends Command {
             return false;
         }
 
-        if (args.length == 0) {
-            sender.sendMessage(getUsage());
-            return false;
-        }
-
         Player senderPlayer = (Player) sender;
+
+        if (args.length == 0) {
+            guiAction.accept(senderPlayer);
+            return true;
+        }
 
         long cooldownLeft = plugin.getCooldownManager().getCooldownLeft(senderPlayer.getUniqueId());
         if (cooldownLeft > 0) {
@@ -55,7 +64,7 @@ public abstract class TeleportRequestCommand extends Command {
         }
 
         String targetName = args[0];
-        Player targetPlayer = sender.getServer().getPlayer(targetName);
+        Player targetPlayer = PlayerNameMatcher.find(sender.getServer().getOnlinePlayers(), targetName);
 
         PreTeleportRequestEvent preTeleportRequestEvent = new PreTeleportRequestEvent(senderPlayer, targetName, targetPlayer);
         plugin.getServer().getPluginManager().callEvent(preTeleportRequestEvent);

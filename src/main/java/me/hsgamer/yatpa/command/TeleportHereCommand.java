@@ -6,11 +6,12 @@ import me.hsgamer.yatpa.YATPA;
 import me.hsgamer.yatpa.request.RequestType;
 import org.bukkit.entity.Player;
 
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.function.Consumer;
 
 public class TeleportHereCommand extends TeleportRequestCommand {
-    public TeleportHereCommand(YATPA plugin) {
-        super(plugin, "tpahere", "Request to teleport a player to you", Collections.singletonList("tpah"));
+    public TeleportHereCommand(YATPA plugin, Consumer<Player> guiAction) {
+        super(plugin, "tpahere", "Request to teleport a player to you", Arrays.asList("tpah", "tph"), guiAction);
         setPermission(Permissions.TPA_HERE.getName());
     }
 
